@@ -20,7 +20,7 @@
 / {
         conditional_layers {
                 compatible = "zmk,conditional-layers";
-                numpad_layer {
+                tri_layer {
                         if-layers = <1 2>;
                         then-layer = <3>;
                 };
@@ -73,7 +73,7 @@
                         >;
                 };
 
-                numpad_layer {
+                tri_layer {
 //                                     --------------------------------------                               ----------------------------------------
 //                                     | F1   | F2  | F3  | F4  | F5  | F6  |                               |  7   |  8   |  9  |  *  |  /  | BKSP |
 //                                     | F7   | F8  | F9  | F10 | F11 | F12 |                               |  4   |  5   |  6  |  +  |  -  | DEL  |
