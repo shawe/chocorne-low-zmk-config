@@ -52,7 +52,7 @@
 //                                                              -------------------                   ---------------------
                         bindings = <
    &kp TAB      &kp NUMBER_1 &kp NUMBER_2 &kp NUMBER_3 &kp NUMBER_4 &kp NUMBER_5                                     &kp NUMBER_6   &kp NUMBER_7 &kp NUMBER_8 &kp NUMBER_9 &kp NUMBER_0 &kp C_VOL_UP
-   &mt LCTRL ESC &trans       &kp K_PREV   &kp K_PP     &kp K_NEXT   &trans                                           &trans         &kp UP       &trans       &kp HOME     &kp END      &kp C_MUTE
+   &mt LCTRL ESC &trans      &kp K_PREV   &kp K_PP     &kp K_NEXT   &trans                                           &trans         &kp UP       &trans       &kp HOME     &kp END      &kp C_MUTE
    &kp LSHFT    &trans       &trans       &trans       &trans       &trans                                           &kp LEFT       &kp DOWN     &kp RIGHT    &kp PG_DN    &kp PG_UP    &kp C_VOL_DN
                                                        &kp LGUI     &mo LOWER    &kp SPACE              &kp RET      &lt RAISE BSPC &kp RALT
                         >;
@@ -60,14 +60,14 @@
 
                 raise_layer {
 //                                     --------------------------------------                               ----------------------------------------
-//                                     | TAB  |     |     |     |     |PRINT|                               |      |      |     |     |     |      |
-//                                     | BTCLR| BT1 | BT2 | BT3 | BT4 | BT5 |                               |      | PRV  | P/P | NXT |     |      |
+//                                     | TAB  |BTCLR|BTPRV|BTNXT|     |PRINT|                               |      |      |     |     |     |      |
+//                                     | ESC  | BT1 | BT2 | BT3 | BT4 | BT5 |                               |      | PRV  | P/P | NXT |     |      |
 //                                     | SHIFT|     |     |     |     |N PAD|------                   ------|      |      |     |     |     |      |
 //                                     -------------------------| GUI | LWR | SPC |                   | ENT | BKSP | ALT  |-------------------------
 //                                                              -------------------                   ---------------------
                         bindings = <
-   &kp TAB      &trans       &trans       &trans       &trans       &kp PSCRN                                        &trans         &trans       &trans       &trans       &trans       &trans
-   &bt BT_CLR   &bt BT_SEL 0 &bt BT_SEL 1 &bt BT_SEL 2 &bt BT_SEL 3 &bt BT_SEL 4                                     &trans         &kp K_PREV   &kp K_PP     &kp K_NEXT   &trans       &trans
+   &kp TAB      &bt BT_CLR   &bt BT_PRV   &bt BT_NXT   &trans       &kp PSCRN                                        &trans         &trans       &trans       &trans       &trans       &trans
+   &mt LCTRL ESC &bt BT_SEL 0 &bt BT_SEL 1 &bt BT_SEL 2 &bt BT_SEL 3 &bt BT_SEL 4                                    &trans         &kp K_PREV   &kp K_PP     &kp K_NEXT   &trans       &trans
    &kp LSHFT    &trans       &trans       &trans       &trans       &tog NUMPAD                                      &trans         &trans       &trans       &trans       &trans       &trans
                                                        &kp LGUI     &mo LOWER    &kp SPACE              &kp RET      &lt RAISE BSPC &kp RALT
                         >;
@@ -88,5 +88,4 @@
                         >;
                 };
         };
-    };
 };
