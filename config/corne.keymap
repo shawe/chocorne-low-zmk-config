@@ -16,152 +16,175 @@
 #define FUNC    4
 
 &mt {
-        tapping-term-ms = <200>;
-        flavor = "tap-preferred";
+    tapping-term-ms = <200>;
+    flavor = "tap-preferred";
 };
 
 / {
-        combos {
-                compatible = "zmk,combos";
-                combo_plus {    // +
-                        timeout-ms = <50>;
-                        key-positions = <10 11>;
-                        bindings = <&kp PLUS>;
-                };
-                combo_cedilla { // ç
-                        timeout-ms = <50>;
-                        key-positions = <22 23>;
-                        bindings = <&kp BSLH>;
-                };
-                combo_lpar {    // (
-                        timeout-ms = <50>;
-                        key-positions = <4 5>;
-                        bindings = <&kp LEFT_PARENTHESIS>;
-                };
-                combo_rpar {    // )
-                        timeout-ms = <50>;
-                        key-positions = <6 7>;
-                        bindings = <&kp RIGHT_PARENTHESIS>;
-                };
-                combo_lbrc {    // {
-                        timeout-ms = <50>;
-                        key-positions = <16 17>;
-                        bindings = <&kp LEFT_BRACE>;
-                };
-                combo_rbrc {    // }
-                        timeout-ms = <50>;
-                        key-positions = <18 19>;
-                        bindings = <&kp RIGHT_BRACE>;
-                };
-                combo_lbkt {    // [
-                        timeout-ms = <50>;
-                        key-positions = <28 29>;
-                        bindings = <&kp LEFT_BRACKET>;
-                };
-                combo_rbkt {    // ]
-                        timeout-ms = <50>;
-                        key-positions = <30 31>;
-                        bindings = <&kp RIGHT_BRACKET>;
-                };
-                combo_numpad {    // NUMPAD
-                        timeout-ms = <50>;
-                        key-positions = <37 38>;
-                        bindings = <&kp NUMPAD>;
-                };
-                combo_func {    // FUNC
-                        timeout-ms = <50>;
-                        key-positions = <41 42>;
-                        bindings = <&kp FUNC>;
-                };
+    combos {
+        compatible = "zmk,combos";
+
+        combo_plus {
+            timeout-ms = <50>;
+            key-positions = <10 11>;
+            bindings = <&kp PLUS>;
         };
-        conditional_layers {
-                compatible = "zmk,conditional-layers";
-                tri_layer {
-                        if-layers = <1 2>;
-                        then-layer = <3>;
-                };
+
+        combo_cedilla {
+            timeout-ms = <50>;
+            key-positions = <22 23>;
+            bindings = <&kp BSLH>;
         };
-        keymap {
-                compatible = "zmk,keymap";
 
-                default_layer {
-                        label = "QWERTY";
-//                                     --------------------------------------                               ----------------------------------------
-//                                     | TAB  |  Q  |  W  |  E  |  R  |  T  |                               |  Y   |  U   |  I  |  O  |  P  |  `   |
-//                                     | ESC  |  A  |  S  |  D  |  F  |  G  |                               |  H   |  J   |  K  |  L  |  Ñ  |  ´   |
-//                                     | SHIFT|  Z  |  X  |  C  |  V  |  B  |------                   ------|  N   |  M   |  ,  |  .  |  -  | SHFT |
-//                                     -------------------------| GUI | LWR | SPC |                   | ENT | BKSP | ALT  --------------------------
-//                                                              -------------------                   --------------------
-                        bindings = <
-   &kp TAB       &kp Q        &kp W        &kp E        &kp R         &kp T                                            &lt K_REDO Y   &kp U        &kp I        &kp O        &kp P        &kp LBRC
-   &mt LCTRL ESC &kp A        &kp S        &kp D        &kp F         &kp G                                            &kp H          &kp J        &kp K        &kp L        &kp SEMI     &kp SQT
-   &kp LSHFT     &lt K_UNDO Z &lt K_CUT X  &lt K_COPY C &lt K_PASTE V &kp B                                            &kp N          &kp M        &kp COMMA    &kp DOT      &kp FSLH     &kp RSHFT
-                                                        &kp LGUI      &mo LOWER    &kp SPACE              &kp RET      &lt RAISE BSPC &kp RALT
-                        >;
-                };
-
-                lower_layer {
-                        label = "NUMBERS";
-//                                     --------------------------------------                               ----------------------------------------
-//                                     | GRAVE|  1  |  2  |  3  |  4  |  5  |                               |  6   |  7   |  8  |  9  |  0  |      |
-//                                     | ESC  |     | PRV | P/P | NXT |     |                               | HOME |  ↑   | END |     |     |  PG↑ |
-//                                     | SHIFT| DFLT| LWR |RAISE|N PAD| FNC |------                   ------|  ←   |  ↓   |  →  |     |     |  PG↓ |
-//                                     -------------------------| GUI | LWR | SPC |                   | ENT | BKSP | ALT  |-------------------------
-//                                                              -------------------                   ---------------------
-                        bindings = <
-   &kp GRAVE     &kp NUMBER_1 &kp NUMBER_2 &kp NUMBER_3 &kp NUMBER_4 &kp NUMBER_5                                     &kp NUMBER_6   &kp NUMBER_7 &kp NUMBER_8 &kp NUMBER_9 &kp NUMBER_0 &none
-   &mt LCTRL ESC &none        &kp K_PREV   &kp K_PP     &kp K_NEXT   &none                                            &kp HOME       &kp UP        &kp END     &none        &none        &kp PG_UP
-   &kp LSHFT     &tog DEFAULT &tog LOWER   &tog RAISE   &tog NUMPAD  &tog FUNC                                        &kp LEFT       &kp DOWN     &kp RIGHT    &none        &none        &kp PG_DN
-                                                        &kp LGUI     &mo LOWER    &kp SPACE              &kp RET      &lt RAISE BSPC &kp RALT
-                        >;
-                };
-
-                raise_layer {
-                        label = "MEDIA";
-//                                     --------------------------------------                               ----------------------------------------
-//                                     | TAB  |     |     |     |     |PRINT|                               |      | VOL- | MUTE| VOL+|     |      |
-//                                     | ESC  |     |     |     |     |     |                               |      | PRV  | P/P | NXT |     |      |
-//                                     | SHIFT| DFLT| LWR |RAISE|N PAD| FNC |------                   ------|      |      |     |     |     |      |
-//                                     -------------------------| GUI | LWR | SPC |                   | ENT | BKSP | ALT  |-------------------------
-//                                                              -------------------                   ---------------------
-                        bindings = <
-   &kp TAB       &none        &none        &none        &none        &kp PSCRN                                        &none          &kp C_VOL_DN &kp C_MUTE   &kp C_VOL_UP &none        &none
-   &mt LCTRL ESC &none        &none        &none        &none        &none                                            &none          &kp K_PREV   &kp K_PP     &kp K_NEXT   &none        &none
-   &kp LSHFT     &tog DEFAULT &tog LOWER   &tog RAISE   &tog NUMPAD  &tog FUNC                                        &none          &none        &none        &none        &none        &none
-                                                        &kp LGUI     &mo LOWER    &kp SPACE              &kp RET      &lt RAISE BSPC &kp RALT
-                        >;
-                };
-
-                numpad_layer {
-                        label = "NUMPAD";
-//                                     --------------------------------------                               ----------------------------------------
-//                                     | F1   | F2  | F3  | F4  | F5  | F6  |                               |  7   |  8   |  9  |  *  |  /  | BKSP |
-//                                     | F7   | F8  | F9  | F10 | F11 | F12 |                               |  4   |  5   |  6  |  +  |  -  | DEL  |
-//                                     |      | DFLT| LWR |RAISE|N PAD| FNC |------                   ------|  1   |  2   |  3  |     |     |      |
-//                                     -------------------------| GUI | LWR | SPC |                   | ENT |  0   |  .   |-------------------------
-//                                                              -------------------                   ---------------------
-                        bindings = <
-   &kp F1        &kp F2       &kp F3       &kp F4       &kp F5       &kp F6                                           &kp N7         &kp N8       &kp N9       &kp KP_MULTIPLY &kp KP_DIVIDE &kp BSPC
-   &kp F7        &kp F8       &kp F9       &kp F10      &kp F11      &kp F12                                          &kp N4         &kp N5       &kp N6       &kp PLUS     &kp MINUS    &kp DEL
-   &kp LSHFT     &tog DEFAULT &tog LOWER   &tog RAISE   &tog NUMPAD  &tog FUNC                                        &kp N1         &kp N2       &kp N3       &kp EQUAL    &none        &none
-                                                        &mo RAISE    &mo LOWER    &kp SPACE              &kp RET      &kp N0         &kp DOT
-                        >;
-                };
-
-                function_layer {
-                        label = "CONFIG";
-//                                     --------------------------------------                               ----------------------------------------
-//                                     | TAB  |BTCLR|BTPRV|BTNXT|RESET| BOOT|                               | BOOT | RESET|     |     |     |      |
-//                                     | ESC  | BT1 | BT2 | BT3 | BT4 | BT5 |                               |      |      |     |     |     |      |
-//                                     | SHIFT| DFLT| LWR |RAISE|N PAD| FNC |------                   ------| USB  | BLE  | TOG |     |     |      |
-//                                     -------------------------| GUI | LWR | SPC |                   | ENT | BKSP | ALT  |-------------------------
-//                                                              -------------------                   ---------------------
-                        bindings = <
-   &kp TAB       &bt BT_CLR   &bt BT_PRV   &bt BT_NXT   &reset       &bootloader                                      &bootloader    &reset       &none        &none        &none        &none
-   &mt LCTRL ESC &bt BT_SEL 0 &bt BT_SEL 1 &bt BT_SEL 2 &bt BT_SEL 3 &bt BT_SEL 4                                     &none          &none        &none        &none        &none        &none
-   &kp LSHFT     &tog DEFAULT &tog LOWER   &tog RAISE   &tog NUMPAD  &tog FUNC                                        &out OUT_USB   &out OUT_BLE &out OUT_TOG &none        &none        &none
-                                                        &mo RAISE    &mo LOWER    &kp SPACE              &kp RET      &lt RAISE BSPC &kp RALT
-                        >;
-                };
+        combo_lpar {
+            timeout-ms = <50>;
+            key-positions = <4 5>;
+            bindings = <&kp LEFT_PARENTHESIS>;
         };
+
+        combo_rpar {
+            timeout-ms = <50>;
+            key-positions = <6 7>;
+            bindings = <&kp RIGHT_PARENTHESIS>;
+        };
+
+        combo_lbrc {
+            timeout-ms = <50>;
+            key-positions = <16 17>;
+            bindings = <&kp LEFT_BRACE>;
+        };
+
+        combo_rbrc {
+            timeout-ms = <50>;
+            key-positions = <18 19>;
+            bindings = <&kp RIGHT_BRACE>;
+        };
+
+        combo_lbkt {
+            timeout-ms = <50>;
+            key-positions = <28 29>;
+            bindings = <&kp LEFT_BRACKET>;
+        };
+
+        combo_rbkt {
+            timeout-ms = <50>;
+            key-positions = <30 31>;
+            bindings = <&kp RIGHT_BRACKET>;
+        };
+
+        combo_numpad {
+            timeout-ms = <50>;
+            key-positions = <37 36>;
+            bindings = <&kp 3>;
+        };
+
+        combo_func {
+            timeout-ms = <50>;
+            key-positions = <41 42 40>;
+            bindings = <&kp 4>;
+        };
+    };
+
+    conditional_layers {
+        compatible = "zmk,conditional-layers";
+
+        tri_layer {
+            if-layers = <1 2>;
+            then-layer = <3>;
+        };
+    };
+
+    keymap {
+        compatible = "zmk,keymap";
+
+        default_layer {
+            label = "QWERTY";
+
+            //                                     --------------------------------------                               ----------------------------------------
+            //                                     | TAB  |  Q  |  W  |  E  |  R  |  T  |                               |  Y   |  U   |  I  |  O  |  P  |  `   |
+            //                                     | ESC  |  A  |  S  |  D  |  F  |  G  |                               |  H   |  J   |  K  |  L  |  Ñ  |  ´   |
+            //                                     | SHIFT|  Z  |  X  |  C  |  V  |  B  |------                   ------|  N   |  M   |  ,  |  .  |  -  | SHFT |
+            //                                     -------------------------| GUI | LWR | SPC |                   | ENT | BKSP | ALT  --------------------------
+            //                                                              -------------------                   --------------------
+
+            bindings = <
+       &kp TAB         &kp Q        &kp W         &kp E          &kp R      &kp T  &lt K_REDO Y       &kp U      &kp I    &kp O     &kp P   &kp LBRC
+ &mt LCTRL ESC         &kp A        &kp S         &kp D          &kp F      &kp G         &kp H       &kp J      &kp K    &kp L  &kp SEMI    &kp SQT
+     &kp LSHFT  &lt K_UNDO Z  &lt K_CUT X  &lt K_COPY C  &lt K_PASTE V      &kp B         &kp N       &kp M  &kp COMMA  &kp DOT  &kp FSLH  &kp RSHFT
+                                               &kp LGUI          &mo 1  &kp SPACE       &kp RET  &lt 2 BSPC   &kp RALT
+            >;
+        };
+
+        lower_layer {
+            label = "NUMBERS";
+
+            //                                     --------------------------------------                               ----------------------------------------
+            //                                     | GRAVE|  1  |  2  |  3  |  4  |  5  |                               |  6   |  7   |  8  |  9  |  0  |      |
+            //                                     | ESC  |     | PRV | P/P | NXT |     |                               | HOME |  ↑   | END |     |     |  PG↑ |
+            //                                     | SHIFT| DFLT| LWR |RAISE|N PAD| FNC |------                   ------|  ←   |  ↓   |  →  |     |     |  PG↓ |
+            //                                     -------------------------| GUI | LWR | SPC |                   | ENT | BKSP | ALT  |-------------------------
+            //                                                              -------------------                   ---------------------
+
+            bindings = <
+     &kp GRAVE  &kp NUMBER_1  &kp NUMBER_2  &kp NUMBER_3  &kp NUMBER_4  &kp NUMBER_5  &kp NUMBER_6  &kp NUMBER_7  &kp NUMBER_8  &kp NUMBER_9  &kp NUMBER_0      &none
+ &mt LCTRL ESC         &none    &kp K_PREV      &kp K_PP    &kp K_NEXT         &none      &kp HOME        &kp UP       &kp END         &none         &none  &kp PG_UP
+     &kp LSHFT        &tog 0        &tog 1        &tog 2        &tog 3        &tog 4      &kp LEFT      &kp DOWN     &kp RIGHT         &none         &none  &kp PG_DN
+                                                &kp LGUI         &mo 1     &kp SPACE       &kp RET    &lt 2 BSPC      &kp RALT
+            >;
+        };
+
+        raise_layer {
+            label = "MEDIA";
+
+            //                                     --------------------------------------                               ----------------------------------------
+            //                                     | TAB  |     |     |     |     |PRINT|                               |      | VOL- | MUTE| VOL+|     |      |
+            //                                     | ESC  |     |     |     |     |     |                               |      | PRV  | P/P | NXT |     |      |
+            //                                     | SHIFT| DFLT| LWR |RAISE|N PAD| FNC |------                   ------|      |      |     |     |     |      |
+            //                                     -------------------------| GUI | LWR | SPC |                   | ENT | BKSP | ALT  |-------------------------
+            //                                                              -------------------                   ---------------------
+
+            bindings = <
+       &kp TAB   &none   &none     &none   &none  &kp PSCRN    &none  &kp C_VOL_DN  &kp C_MUTE  &kp C_VOL_UP   &none   &none
+ &mt LCTRL ESC   &none   &none     &none   &none      &none    &none    &kp K_PREV    &kp K_PP    &kp K_NEXT   &none   &none
+     &kp LSHFT  &tog 0  &tog 1    &tog 2  &tog 3     &tog 4    &none         &none       &none         &none   &none   &none
+                                &kp LGUI   &mo 1  &kp SPACE  &kp RET    &lt 2 BSPC    &kp RALT
+            >;
+        };
+
+        numpad_layer {
+            label = "NUMPAD";
+
+            //                                     --------------------------------------                               ----------------------------------------
+            //                                     | F1   | F2  | F3  | F4  | F5  | F6  |                               |  7   |  8   |  9  |  *  |  /  | BKSP |
+            //                                     | F7   | F8  | F9  | F10 | F11 | F12 |                               |  4   |  5   |  6  |  +  |  -  | DEL  |
+            //                                     |      | DFLT| LWR |RAISE|N PAD| FNC |------                   ------|  1   |  2   |  3  |     |     |      |
+            //                                     -------------------------| GUI | LWR | SPC |                   | ENT |  0   |  .   |-------------------------
+            //                                                              -------------------                   ---------------------
+
+            bindings = <
+    &kp F1  &kp F2  &kp F3   &kp F4   &kp F5     &kp F6   &kp N7  &kp N8   &kp N9  &kp KP_MULTIPLY  &kp KP_DIVIDE  &kp BSPC
+    &kp F7  &kp F8  &kp F9  &kp F10  &kp F11    &kp F12   &kp N4  &kp N5   &kp N6         &kp PLUS      &kp MINUS   &kp DEL
+ &kp LSHFT  &tog 0  &tog 1   &tog 2   &tog 3     &tog 4   &kp N1  &kp N2   &kp N3        &kp EQUAL          &none     &none
+                              &mo 2    &mo 1  &kp SPACE  &kp RET  &kp N0  &kp DOT
+            >;
+        };
+
+        function_layer {
+            label = "CONFIG";
+
+            //                                     --------------------------------------                               ----------------------------------------
+            //                                     | TAB  |BTCLR|BTPRV|BTNXT|RESET| BOOT|                               | BOOT | RESET|     |     |     |      |
+            //                                     | ESC  | BT1 | BT2 | BT3 | BT4 | BT5 |                               |      |      |     |     |     |      |
+            //                                     | SHIFT| DFLT| LWR |RAISE|N PAD| FNC |------                   ------| USB  | BLE  | TOG |     |     |      |
+            //                                     -------------------------| GUI | LWR | SPC |                   | ENT | BKSP | ALT  |-------------------------
+            //                                                              -------------------                   ---------------------
+
+            bindings = <
+       &kp TAB    &bt BT_CLR    &bt BT_PRV    &bt BT_NXT        &reset   &bootloader   &bootloader        &reset         &none   &none   &none   &none
+ &mt LCTRL ESC  &bt BT_SEL 0  &bt BT_SEL 1  &bt BT_SEL 2  &bt BT_SEL 3  &bt BT_SEL 4         &none         &none         &none   &none   &none   &none
+     &kp LSHFT        &tog 0        &tog 1        &tog 2        &tog 3        &tog 4  &out OUT_USB  &out OUT_BLE  &out OUT_TOG   &none   &none   &none
+                                                   &mo 2         &mo 1     &kp SPACE       &kp RET    &lt 2 BSPC      &kp RALT
+            >;
+        };
+    };
 };
